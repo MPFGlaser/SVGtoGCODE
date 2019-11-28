@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SVGtoGCODE"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="SVGtoGCODE" Height="450" Width="350">
     <Grid>
-        
+        <Button Content="Select file" Margin="80,0,190,30" Click="Button_Click" VerticalAlignment="Bottom"/>
+        <Button Content="Convert" Margin="190,0,80,30" Height="20" VerticalAlignment="Bottom"/>
+
     </Grid>
 </Window>
