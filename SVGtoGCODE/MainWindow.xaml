@@ -9,7 +9,7 @@
     <Grid>
         <Button x:Name="ButtonSelectFile" Content="Select file" Margin="80,0,190,30" Click="Button_Click" VerticalAlignment="Bottom"/>
         <Button x:Name="ButtonConvert" Content="Convert" Margin="190,0,80,30" Height="20" VerticalAlignment="Bottom"/>
-        <Label x:Name="LabelStatus" Content="Status" Margin="80,326,80,70.5"/>
+        <TextBlock x:Name="TextBlockStatus" Margin="80,334,80,72.5" TextWrapping="Wrap" Text="Status" Height="20" TextAlignment="Center"/>
 
     </Grid>
 </Window>
