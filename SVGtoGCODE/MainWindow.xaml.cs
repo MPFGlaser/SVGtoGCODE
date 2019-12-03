@@ -25,4 +25,10 @@ namespace SVGtoGCODE
             InitializeComponent();
         }
     }
+
+    // Class for working with (imported) vector files
+    public class Vector
+    {
+
+    }
 }
