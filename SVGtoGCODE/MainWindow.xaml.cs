@@ -60,6 +60,10 @@ namespace SVGtoGCODE
     // Class for working with (imported) vector files
     public class Vector
     {
-
+        // Should have:
+        // Check aspect ratio/rotation on import, pad if necessary.
+        // Function to create temporary copy
+        // Path to temporary copy of file
+        // Name (+ generator?)
     }
 }
