@@ -5,11 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SVGtoGCODE"
         mc:Ignorable="d"
-        Title="SVGtoGCODE" Height="450" Width="350">
-  <Grid>
-    <Button x:Name="ButtonSelectFile" Content="Select file" Margin="80,0,190,30" Click="Button_Select_Click" VerticalAlignment="Bottom"/>
-    <Button x:Name="ButtonConvert" Content="Convert" Margin="190,0,80,30" Height="20" VerticalAlignment="Bottom"/>
-    <TextBlock x:Name="TextBlockStatus" Margin="80,318,80,57" TextWrapping="Wrap" Text="Status" TextAlignment="Center"/>
+        Title="SVGtoGCODE" Height="450" Width="350" MinWidth="350" MinHeight="443">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="330*"/>
+            <RowDefinition Height="95"/>
+        </Grid.RowDefinitions>
+        <Grid Height="80" Margin="72,0,73,10.5" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200" Grid.Row="1">
+            <TextBlock x:Name="TextBlockStatus" Margin="0,0,0,40" TextWrapping="Wrap" Text="Status" TextAlignment="Center" Grid.RowSpan="2" Height="55" Width="200" ScrollViewer.CanContentScroll="True" Padding="5" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <Button x:Name="ButtonSelectFile" Content="Select file" Margin="12,0,0,3" Click="Button_Select_Click" VerticalAlignment="Bottom" Height="20" Width="75" HorizontalAlignment="Left" MinWidth="75" MinHeight="20"/>
+            <Button x:Name="ButtonConvert" Content="Convert" Margin="0,0,12,3" Height="20" VerticalAlignment="Bottom" Width="75" HorizontalAlignment="Right" MinWidth="75" MinHeight="20"/>
+        </Grid>
+        <Viewbox Margin="10" MinWidth="200" MinHeight="283">
+            <Border BorderBrush="Black" BorderThickness="1" MinWidth="200" MinHeight="283" Margin="5">
+                <Image x:Name="PreviewImage" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </Viewbox>
 
-  </Grid>
+
+    </Grid>
 </Window>
