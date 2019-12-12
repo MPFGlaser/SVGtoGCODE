@@ -75,12 +75,14 @@ namespace SVGtoGCODE
 
         private string filePath;
         private string fileName;
+        private string tempSVG;
 
 
         public Vector(string path)
         {
             filePath = path;
             SelectedFileName();
+            CopySVGToTempDir();
         }
 
         public string SelectedFileName()
@@ -89,10 +91,15 @@ namespace SVGtoGCODE
             return fileName;
         }
 
-        private string GenerateFileName()
+        //private string GenerateFileName()
+        //{
+        //    var uniqueFileName = System.IO.Path.GetRandomFileName();
+        //    return uniqueFileName;
+        //}
+
+        private void CopySVGToTempDir()
         {
-            var uniqueFileName = System.IO.Path.GetRandomFileName();
-            return uniqueFileName;
+            File.Copy(filePath, System.IO.Path.GetTempFileName());
         }
     }
 }
