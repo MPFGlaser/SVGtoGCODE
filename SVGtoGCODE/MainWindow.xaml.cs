@@ -14,7 +14,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using System.Windows.Navigation;
+using Svg;
+using System.Xml;
 
 namespace SVGtoGCODE
 {
@@ -33,7 +36,9 @@ namespace SVGtoGCODE
             {
                 FileName = "artwork.svg",
                 Filter = "Vector graphics (*.svg)|*.svg",
-                Title = "Select file"
+                Title = "Select file",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                RestoreDirectory = true
             };
 
             if (openFileDialog.ShowDialog() == true)
@@ -42,7 +47,16 @@ namespace SVGtoGCODE
                 {
                     if ((checkStream = openFileDialog.OpenFile()) != null)
                     {
-                        TextBlockStatus.Text = "Selected file: " + Path.GetFileName(openFileDialog.FileName);
+                        TextBlockStatus.Text = "Selected file: " + System.IO.Path.GetFileName(openFileDialog.FileName);
+                        //TextBlockStatus.Text = System.IO.Path.GetTempPath();
+
+
+                        //file1.Text = "File loaded.";
+
+                        //string path = openFile.FileName;
+                        //var svgDocument = Svg.SvgDocument.Open(path);
+                        //svgDocument.ShapeRendering = SvgShapeRendering.Auto;
+
                     }
                 }
                 catch (Exception ex)
@@ -64,6 +78,19 @@ namespace SVGtoGCODE
         // Check aspect ratio/rotation on import, pad if necessary.
         // Function to create temporary copy
         // Path to temporary copy of file
+        // generate random file name + be able to have it be requested publicly
         // Name (+ generator?)
+
+
+        public Vector()
+        {
+
+        }
+
+        private string GenerateFileName()
+        {
+            var uniqueFileName = System.IO.Path.GetRandomFileName();
+            return uniqueFileName;
+        }
     }
 }

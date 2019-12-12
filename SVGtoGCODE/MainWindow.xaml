@@ -12,7 +12,7 @@
             <RowDefinition Height="95"/>
         </Grid.RowDefinitions>
         <Grid Height="80" Margin="72,0,73,10.5" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200" Grid.Row="1">
-            <TextBlock x:Name="TextBlockStatus" Margin="0,0,0,40" TextWrapping="Wrap" Text="Status" TextAlignment="Center" Grid.RowSpan="2" Height="55" Width="200" ScrollViewer.CanContentScroll="True" Padding="5" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <TextBlock x:Name="TextBlockStatus" Margin="0,0,0,40" TextWrapping="Wrap" Text="Status" TextAlignment="Center" Grid.RowSpan="2" Height="55" Width="200" ScrollViewer.CanContentScroll="True" Padding="5" ScrollViewer.HorizontalScrollBarVisibility="Auto" ToolTip="{Binding Text, ElementName=TextBlockStatus}" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
             <Button x:Name="ButtonSelectFile" Content="Select file" Margin="12,0,0,3" Click="Button_Select_Click" VerticalAlignment="Bottom" Height="20" Width="75" HorizontalAlignment="Left" MinWidth="75" MinHeight="20"/>
             <Button x:Name="ButtonConvert" Content="Convert" Margin="0,0,12,3" Height="20" VerticalAlignment="Bottom" Width="75" HorizontalAlignment="Right" MinWidth="75" MinHeight="20"/>
         </Grid>
