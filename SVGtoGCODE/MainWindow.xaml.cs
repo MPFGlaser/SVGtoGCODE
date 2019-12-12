@@ -47,16 +47,8 @@ namespace SVGtoGCODE
                 {
                     if ((checkStream = openFileDialog.OpenFile()) != null)
                     {
-                        TextBlockStatus.Text = "Selected file: " + System.IO.Path.GetFileName(openFileDialog.FileName);
-                        //TextBlockStatus.Text = System.IO.Path.GetTempPath();
-
-
-                        //file1.Text = "File loaded.";
-
-                        //string path = openFile.FileName;
-                        //var svgDocument = Svg.SvgDocument.Open(path);
-                        //svgDocument.ShapeRendering = SvgShapeRendering.Auto;
-
+                        Vector vector = new Vector(System.IO.Path.GetFullPath(openFileDialog.FileName));
+                        TextBlockStatus.Text = "Selected file:\n" + vector.SelectedFileName();
                     }
                 }
                 catch (Exception ex)
@@ -81,10 +73,20 @@ namespace SVGtoGCODE
         // generate random file name + be able to have it be requested publicly
         // Name (+ generator?)
 
+        private string filePath;
+        private string fileName;
 
-        public Vector()
+
+        public Vector(string path)
         {
+            filePath = path;
+            SelectedFileName();
+        }
 
+        public string SelectedFileName()
+        {
+            fileName = System.IO.Path.GetFileName(filePath);
+            return fileName;
         }
 
         private string GenerateFileName()
