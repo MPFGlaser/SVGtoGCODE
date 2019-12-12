@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SVGtoGCODE"
         mc:Ignorable="d"
-        Title="SVGtoGCODE" Height="450" Width="350" MinWidth="350" MinHeight="443">
+        Title="SVGtoGCODE" Height="450" Width="350" MinWidth="350" MinHeight="450">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="330*"/>
