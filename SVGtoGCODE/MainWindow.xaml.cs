@@ -23,6 +23,7 @@ namespace SVGtoGCODE
 {
     public partial class MainWindow : Window
     {
+        Vector vector = new Vector();
         public MainWindow()
         {
             InitializeComponent();
@@ -47,8 +48,9 @@ namespace SVGtoGCODE
                 {
                     if ((checkStream = openFileDialog.OpenFile()) != null)
                     {
-                        Vector vector = new Vector(System.IO.Path.GetFullPath(openFileDialog.FileName));
-                        TextBlockStatus.Text = "Selected file:\n" + vector.SelectedFileName();
+                        vector.Setup(System.IO.Path.GetFullPath(openFileDialog.FileName));
+                        DisplayController("status", "Selected file:\n" + vector.SelectedFileName());
+                        PreviewController();
                     }
                 }
                 catch (Exception ex)
@@ -61,6 +63,23 @@ namespace SVGtoGCODE
                 Console.WriteLine("Unknown error occurred. Please try again later.");
             }
         }
+
+        private void PreviewController()
+        {
+            PreviewImage.Source = vector.SendPreview(); 
+        }
+
+        private void DisplayController(string type, string message)
+        {
+            if (type == "error")
+            {
+                TextBlockStatus.Text = "ERROR!\n" + message;
+            }
+            if (type == "status")
+            {
+                TextBlockStatus.Text = message;
+            }
+        }
     }
 
     // Class for working with (imported) vector files
@@ -68,27 +87,57 @@ namespace SVGtoGCODE
     {
         // Should have:
         // Check aspect ratio/rotation on import, pad if necessary.
-        // Function to create temporary copy
-        // Path to temporary copy of file
-        // generate random file name + be able to have it be requested publicly
-        // Name (+ generator?)
+        // X Function to create temporary copy
+        // X Path to temporary copy of file
+        // X generate random file name + be able to have it be requested publicly
+        // X Name (+ generator?)
 
         private string filePath;
         private string fileName;
         private string tempSVG;
+        private BitmapImage previewImage = null;
+        private Bitmap preview = null;
 
+        public Vector() { }
 
-        public Vector(string path)
+        public void Setup(string path)
         {
             filePath = path;
-            SelectedFileName();
             CopySVGToTempDir();
+            VectorPreview();
+            Convert(preview);
         }
 
         public string SelectedFileName()
         {
             fileName = System.IO.Path.GetFileName(filePath);
-            return tempSVG;
+            return fileName;
+        }
+
+        public Bitmap VectorPreview()
+        {
+            var svg = SvgDocument.Open(tempSVG);
+            svg.ShapeRendering = SvgShapeRendering.Auto;
+            Bitmap preview = svg.Draw();
+            Convert(preview);
+            return preview;
+        }
+
+        private BitmapImage Convert(Bitmap src)
+        {
+            MemoryStream ms = new MemoryStream();
+            ((System.Drawing.Bitmap)src).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            BitmapImage previewImage = new BitmapImage();
+            previewImage.BeginInit();
+            ms.Seek(0, SeekOrigin.Begin);
+            previewImage.StreamSource = ms;
+            previewImage.EndInit();
+            return previewImage;
+        }
+
+        public BitmapImage SendPreview()
+        {
+            return previewImage;
         }
 
         private void CopySVGToTempDir()
