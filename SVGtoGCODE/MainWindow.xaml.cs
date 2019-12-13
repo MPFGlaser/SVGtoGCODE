@@ -88,18 +88,21 @@ namespace SVGtoGCODE
         public string SelectedFileName()
         {
             fileName = System.IO.Path.GetFileName(filePath);
-            return fileName;
+            return tempSVG;
         }
-
-        //private string GenerateFileName()
-        //{
-        //    var uniqueFileName = System.IO.Path.GetRandomFileName();
-        //    return uniqueFileName;
-        //}
 
         private void CopySVGToTempDir()
         {
-            File.Copy(filePath, System.IO.Path.GetTempFileName());
+            tempSVG = System.IO.Path.GetTempFileName();
+            try
+            {
+                File.Copy(filePath, tempSVG, true);
+            }
+            catch (Exception)
+            {
+                // TO DO: Exception handling
+                throw;
+            }
         }
     }
 }
