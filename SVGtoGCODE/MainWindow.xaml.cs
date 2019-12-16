@@ -38,8 +38,10 @@ namespace SVGtoGCODE
                 FileName = "artwork.svg",
                 Filter = "Vector graphics (*.svg)|*.svg",
                 Title = "Select file",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                RestoreDirectory = true
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+
+                // not implemented in WPF
+                //RestoreDirectory = true
             };
 
             if (openFileDialog.ShowDialog() == true)
@@ -66,7 +68,7 @@ namespace SVGtoGCODE
 
         private void PreviewController()
         {
-            PreviewImage.Source = vector.SendPreview(); 
+            PreviewImage.Source = vector.SendPreview();
         }
 
         private void DisplayController(string type, string message)
@@ -105,7 +107,7 @@ namespace SVGtoGCODE
             filePath = path;
             CopySVGToTempDir();
             VectorPreview();
-            Convert(preview);
+            //Convert(preview);
         }
 
         public string SelectedFileName()
@@ -123,6 +125,7 @@ namespace SVGtoGCODE
             return preview;
         }
 
+        // big oopsie
         private BitmapImage Convert(Bitmap src)
         {
             MemoryStream ms = new MemoryStream();
