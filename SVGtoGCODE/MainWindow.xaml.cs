@@ -97,8 +97,7 @@ namespace SVGtoGCODE
         private string filePath;
         private string fileName;
         private string tempSVG;
-        private BitmapImage previewImage;
-        private Bitmap preview;
+        private BitmapImage preview;
 
         public Vector() { }
 
@@ -106,8 +105,7 @@ namespace SVGtoGCODE
         {
             filePath = path;
             CopySVGToTempDir();
-            VectorPreview();
-            //Convert(preview);
+            CreatePreview();
         }
 
         public string SelectedFileName()
@@ -116,30 +114,23 @@ namespace SVGtoGCODE
             return fileName;
         }
 
-        public Bitmap VectorPreview()
+        public BitmapImage SendPreview()
         {
-            var svg = SvgDocument.Open(tempSVG);
-            svg.ShapeRendering = SvgShapeRendering.Auto;
-            preview = svg.Draw();
-            Convert(preview);
             return preview;
         }
 
-        private BitmapImage Convert(Bitmap src)
+        private void CreatePreview()
         {
+            var svg = SvgDocument.Open(tempSVG);
+            svg.ShapeRendering = SvgShapeRendering.Auto;
+            Bitmap previewImage = svg.Draw();
             MemoryStream ms = new MemoryStream();
-            ((System.Drawing.Bitmap)src).Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            previewImage = new BitmapImage();
-            previewImage.BeginInit();
+            ((System.Drawing.Bitmap)previewImage).Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            preview = new BitmapImage();
+            preview.BeginInit();
             ms.Seek(0, SeekOrigin.Begin);
-            previewImage.StreamSource = ms;
-            previewImage.EndInit();
-            return previewImage;
-        }
-
-        public BitmapImage SendPreview()
-        {
-            return previewImage;
+            preview.StreamSource = ms;
+            preview.EndInit();
         }
 
         private void CopySVGToTempDir()
