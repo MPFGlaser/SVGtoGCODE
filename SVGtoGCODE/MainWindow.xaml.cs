@@ -97,8 +97,8 @@ namespace SVGtoGCODE
         private string filePath;
         private string fileName;
         private string tempSVG;
-        private BitmapImage previewImage = null;
-        private Bitmap preview = null;
+        private BitmapImage previewImage;
+        private Bitmap preview;
 
         public Vector() { }
 
@@ -120,17 +120,16 @@ namespace SVGtoGCODE
         {
             var svg = SvgDocument.Open(tempSVG);
             svg.ShapeRendering = SvgShapeRendering.Auto;
-            Bitmap preview = svg.Draw();
+            preview = svg.Draw();
             Convert(preview);
             return preview;
         }
 
-        // big oopsie
         private BitmapImage Convert(Bitmap src)
         {
             MemoryStream ms = new MemoryStream();
-            ((System.Drawing.Bitmap)src).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-            BitmapImage previewImage = new BitmapImage();
+            ((System.Drawing.Bitmap)src).Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            previewImage = new BitmapImage();
             previewImage.BeginInit();
             ms.Seek(0, SeekOrigin.Begin);
             previewImage.StreamSource = ms;
