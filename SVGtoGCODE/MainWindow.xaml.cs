@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using Svg;
 using System.Xml;
 
+
 namespace SVGtoGCODE
 {
     public partial class MainWindow : Window
@@ -70,6 +71,12 @@ namespace SVGtoGCODE
             }
         }
 
+        // Handles the convert button
+        private void ButtonConvert_Click(object sender, RoutedEventArgs e)
+        {
+            vector.Convert();
+        }
+
         // Handles the preview window. Gets the preview from the current vector object.
         private void PreviewController()
         {
@@ -91,19 +98,17 @@ namespace SVGtoGCODE
 // Class for working with imported vector files
 public class Vector
 {
-    // Should have:
-    // Check aspect ratio/rotation on import, pad if necessary.
-    // X Function to create temporary copy
-    // X Path to temporary copy of file
-    // X generate random file name + be able to have it be requested publicly
-    // X Name (+ generator?)
-
+    /* TO DO
+       - Check aspect ratio/rotation on import, pad if necessary.
+       - Extract & convert vector shapes to GCode
+    */
 
     // Variables for internal storage of data within class
     private string filePath;
     private string fileName;
     private string tempSVG;
     private BitmapImage preview;
+    private List<string> coordinates = new List<string>();
 
     // Constructor, empty because class is created on programme startup
     public Vector() { }
@@ -127,6 +132,12 @@ public class Vector
     public BitmapImage SendPreview()
     {
         return preview;
+    }
+
+    // Converts the SVG into GCode
+    public void Convert()
+    {
+        // TO DO
     }
 
     // Creates .PNG preview based on the selected vector file. Renders the vector shapes, then draws them in the bitmap image.
