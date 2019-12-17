@@ -30,20 +30,22 @@ namespace SVGtoGCODE
             TextBlockStatus.Text = "Please select your file...";
         }
 
+        // Handles the select button.
         private void Button_Select_Click(object sender, RoutedEventArgs e)
         {
             Stream checkStream = null;
+
+            // Opens file selection dialog with the user's documents folder as default. File input is restricted to .svg files.
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
                 FileName = "artwork.svg",
                 Filter = "Vector graphics (*.svg)|*.svg",
                 Title = "Select file",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-
-                // not implemented in WPF
-                //RestoreDirectory = true
             };
 
+            // Tries to read file (if selected) and passes it to the vector object. 
+            //Then makes sure the user knows what file is selected by showing the file name and a preview.
             if (openFileDialog.ShowDialog() == true)
             {
                 try
@@ -62,15 +64,17 @@ namespace SVGtoGCODE
             }
             else
             {
-                Console.WriteLine("Unknown error occurred. Please try again later.");
+                MessageBox.Show("Unknown error occurred. Please try again later.");
             }
         }
 
+        // Handles the preview window. Gets the preview from the current vector object.
         private void PreviewController()
         {
             PreviewImage.Source = vector.SendPreview();
         }
 
+        // Handles all text to be shown to the user. Takes type argument as well as the message to display.
         private void DisplayController(string type, string message)
         {
             if (type == "error")
@@ -84,7 +88,7 @@ namespace SVGtoGCODE
         }
     }
 
-    // Class for working with (imported) vector files
+    // Class for working with imported vector files
     public class Vector
     {
         // Should have:
@@ -94,13 +98,17 @@ namespace SVGtoGCODE
         // X generate random file name + be able to have it be requested publicly
         // X Name (+ generator?)
 
+
+        // Variables for internal storage of data within class
         private string filePath;
         private string fileName;
         private string tempSVG;
         private BitmapImage preview;
 
+        // Constructor, empty because class is created on programme startup
         public Vector() { }
 
+        // Passes the right parameters to class on image selection
         public void Setup(string path)
         {
             filePath = path;
@@ -108,17 +116,20 @@ namespace SVGtoGCODE
             CreatePreview();
         }
 
+        // Gets the name of selected file. Handy for displaying it to the user.
         public string SelectedFileName()
         {
             fileName = System.IO.Path.GetFileName(filePath);
             return fileName;
         }
 
+        // Returns the generated preview of the selected vector file.
         public BitmapImage SendPreview()
         {
             return preview;
         }
 
+        // Creates .PNG preview based on the selected vector file. Renders the vector shapes, then draws them in the bitmap image.
         private void CreatePreview()
         {
             var svg = SvgDocument.Open(tempSVG);
@@ -133,6 +144,7 @@ namespace SVGtoGCODE
             preview.EndInit();
         }
 
+        // Copies the selected vector file to temp directory to prevent possible damage to the original file during transformation.
         private void CopySVGToTempDir()
         {
             tempSVG = System.IO.Path.GetTempFileName();
