@@ -33,7 +33,7 @@ namespace SVGtoGCODE
         // Handles the select button.
         private void Button_Select_Click(object sender, RoutedEventArgs e)
         {
-            Stream checkStream = null;
+            Stream checkStream;
 
             // Opens file selection dialog with the user's documents folder as default. File input is restricted to .svg files.
             OpenFileDialog openFileDialog = new OpenFileDialog()
@@ -59,12 +59,14 @@ namespace SVGtoGCODE
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: Could not read file from disk. Info: " + ex.Message);
+                    string error = "Error: Could not read file from disk. Info: " + ex.Message;
+                    DisplayController("ERROR", error);
                 }
             }
             else
             {
-                MessageBox.Show("Unknown error occurred. Please try again later.");
+                string error = "Unknown error occurred. Please try again later.";
+                DisplayController("ERROR", error);
             }
         }
 
@@ -157,4 +159,4 @@ public class Vector
         }
     }
 }
-}
+
