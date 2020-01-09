@@ -20,11 +20,15 @@ using Svg;
 using System.Xml;
 
 
+// Declare vector instance globally, then initialise later. Constructor should work then.
+
+
 namespace SVGtoGCODE
 {
     public partial class MainWindow : Window
     {
         Vector vector = new Vector();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -37,6 +41,8 @@ namespace SVGtoGCODE
             Stream checkStream;
 
             // Opens file selection dialog with the user's documents folder as default. File input is restricted to .svg files.
+
+            // MOVE TO SEPARATE METHOD!!!!! 
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
                 FileName = "artwork.svg",
@@ -118,7 +124,14 @@ public class Vector
     {
         filePath = path;
         CopySVGToTempDir();
-        CreatePreview();
+        try
+        {
+            CreatePreview();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
     // Gets the name of selected file. Handy for displaying it to the user.
@@ -175,6 +188,8 @@ public class Vector
         // Holds the information about the defined workspace, such as the height and width dimensions.
     }
 
+
+    // inherit from vector
     public class FittedVector
     {
         // Should hold the info for the instance of Vector which has been fitted in a specific printing/work space
