@@ -169,5 +169,21 @@ public class Vector
             throw;
         }
     }
+
+    public class Workspace
+    {
+        // Holds the information about the defined workspace, such as the height and width dimensions.
+    }
+
+    public class FittedVector
+    {
+        // Should hold the info for the instance of Vector which has been fitted in a specific printing/work space
+    }
+
+    public class GCode
+    {
+        // Is able to convert instance of FittedVector into GCode that complies with the restrictions given in instance of Workspace.
+        // Should be able to generate, save, and export GCode.
+    }
 }
 
