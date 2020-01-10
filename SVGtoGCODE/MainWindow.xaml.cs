@@ -11,7 +11,7 @@ namespace SVGtoGCODE
         public MainWindow()
         {
             InitializeComponent();
-            UpdateStatusText("Please select your file...");
+            SetStatusText("Please select your file...");
         }
 
         // Handles the select button.
@@ -43,20 +43,20 @@ namespace SVGtoGCODE
                     {
 
                         vector = new Vector(System.IO.Path.GetFullPath(openFileDialog.FileName));
-                        UpdateStatusText("Selected file:\n" + vector.SelectedFileName());
+                        SetStatusText("Selected file:\n" + vector.SelectedFileName());
                         UpdatePreview();
                     }
                 }
                 catch (Exception ex)
                 {
                     string error = "Error: Could not read file from disk. Info: " + ex.Message;
-                    UpdateStatusText("ERROR", error);
+                    SetStatusText("ERROR", error);
                 }
             }
             else
             {
                 string error = "Unknown error occurred. Please try again later.";
-                UpdateStatusText("ERROR", error);
+                SetStatusText("ERROR", error);
             }
         }
 
@@ -73,12 +73,12 @@ namespace SVGtoGCODE
         }
 
         // Handles all text to be shown to the user. Takes optional type argument as well as the message to display.
-        private void UpdateStatusText(string message)
+        private void SetStatusText(string message)
         {
             TextBlockStatus.Text = message;
         }
 
-        private void UpdateStatusText(string type, string message)
+        private void SetStatusText(string type, string message)
         {
             TextBlockStatus.Text = type + "!\n" + message;
         }
