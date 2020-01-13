@@ -54,8 +54,7 @@ namespace SVGtoGCODE
             }
             else
             {
-                string error = "Unknown error occurred. Please try again later.";
-                SetStatusText("ERROR", error);
+                SetStatusText("ERROR", "Unknown error occurred. Please try again later.");
             }
         }
 
