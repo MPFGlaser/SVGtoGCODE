@@ -49,8 +49,7 @@ namespace SVGtoGCODE
                 }
                 catch (Exception ex)
                 {
-                    string error = "Error: Could not read file from disk. Info: " + ex.Message;
-                    SetStatusText("ERROR", error);
+                    SetStatusText("ERROR", $"Error: Could not read file from disk. Info: {ex.Message}");
                 }
             }
             else
