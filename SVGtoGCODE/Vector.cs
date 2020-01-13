@@ -22,25 +22,11 @@ namespace SVGtoGCODE
         private BitmapImage preview;
         private List<string> coordinates = new List<string>();
 
-        // Constructor, empty because class is created on programme startup
+        // Constructor
         public Vector() { }
 
+        // Constructor. Passes the right parameters to class on image selection/instance creation
         public Vector(string path)
-        {
-            filePath = path;
-            CopySVGToTempDir();
-            try
-            {
-                CreatePreview();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        // Passes the right parameters to class on image selection
-        public void Setup(string path)
         {
             filePath = path;
             CopySVGToTempDir();
