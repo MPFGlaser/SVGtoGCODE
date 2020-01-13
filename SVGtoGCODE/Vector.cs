@@ -64,6 +64,10 @@ namespace SVGtoGCODE
         {
             var svg = SvgDocument.Open(tempSVG);
             svg.ShapeRendering = SvgShapeRendering.Auto;
+
+            // try using this to fix stuff :)
+            //svg.Transforms.Add(new Svg.Transforms.SvgRotate(90.0f));
+
             Bitmap previewImage = svg.Draw();
             MemoryStream ms = new MemoryStream();
             ((System.Drawing.Bitmap)previewImage).Save(ms, System.Drawing.Imaging.ImageFormat.Png);
