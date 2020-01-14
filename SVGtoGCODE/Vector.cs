@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Media.Imaging;
+using System.Xml;
 
 namespace SVGtoGCODE
 {
@@ -56,7 +57,9 @@ namespace SVGtoGCODE
         // Converts the SVG into GCode
         public void Convert()
         {
-            // TO DO
+            XmlDocument vector = new XmlDocument();
+            vector.Load(tempSVG);
+            FittedVector vectorFitted = new FittedVector(vector);
         }
 
         // Creates .PNG preview based on the selected vector file. Renders the vector shapes, then draws them in the bitmap image.
