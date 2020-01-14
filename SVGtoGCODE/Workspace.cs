@@ -23,6 +23,7 @@ namespace SVGtoGCODE
             UpdateParameters();
         }
 
+        // Updates the parameters/values based on the user-specified settings from the Conversion Settings dialog.
         public void UpdateParameters()
         {
             _sizeX = Properties.Settings.Default.SizeX;
@@ -34,5 +35,16 @@ namespace SVGtoGCODE
             _printSpeed = Properties.Settings.Default.PrintSpeed;
             _moveSpeed = Properties.Settings.Default.MoveSpeed;
         }
+
+
+        // Functions to return parameters of workspace when requested.
+        public int sizeX() { return _sizeX; }
+        public int sizeY() { return _sizeY; }
+        public int offsetX() { return _offsetX; }
+        public int offsetY() { return _offsetY; }
+        public int printHeight() { return _printHeight; }
+        public int moveHeight() { return _moveHeight; }
+        public int printSpeed() { return _printSpeed; }
+        public int moveSpeed() { return _moveSpeed; }
     }
 }
