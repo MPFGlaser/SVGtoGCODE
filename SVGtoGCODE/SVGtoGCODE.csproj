@@ -63,10 +63,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConversionSettings.xaml.cs">
+      <DependentUpon>ConversionSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FittedVector.cs" />
     <Compile Include="GCode.cs" />
     <Compile Include="Vector.cs" />
     <Compile Include="Workspace.cs" />
+    <Page Include="ConversionSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

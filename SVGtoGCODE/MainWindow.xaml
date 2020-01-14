@@ -21,6 +21,7 @@
                 <Image x:Name="PreviewImage" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
         </Viewbox>
+        <Button Content="⚙" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="20" Height="20" Click="OpenSettings"/>
 
 
     </Grid>

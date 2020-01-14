@@ -80,5 +80,11 @@ namespace SVGtoGCODE
         {
             TextBlockStatus.Text = type + "!\n" + message;
         }
+
+        private void OpenSettings(object sender, RoutedEventArgs e)
+        {
+            ConversionSettings settings = new ConversionSettings();
+            settings.Show();
+        }
     }
 }

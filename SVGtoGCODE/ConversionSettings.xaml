@@ -1,0 +1,30 @@
+﻿<Window x:Class="SVGtoGCODE.ConversionSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SVGtoGCODE"
+        mc:Ignorable="d"
+        Title="Conversion Settings" Width="330" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Height="300">
+    <Grid>
+        <TextBox x:Name="SettingBoxSizeX" HorizontalAlignment="Left" Height="25" Margin="165,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" TextChanged="SettingBoxSizeX_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="SettingBoxOffsetX" HorizontalAlignment="Left" Height="25" Margin="221,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" TextChanged="SettingBoxOffsetX_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="SettingBoxOffsetY" HorizontalAlignment="Left" Height="25" Margin="221,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" TextChanged="SettingBoxOffsetY_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="SettingBoxSizeY" HorizontalAlignment="Left" Height="25" Margin="165,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" TextChanged="SettingBoxSizeY_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="SettingBoxPrintHeight" HorizontalAlignment="Left" Height="25" Margin="165,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" TextChanged="SettingBoxPrintHeight_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="SettingBoxMoveHeight" HorizontalAlignment="Left" Height="25" Margin="165,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" TextChanged="SettingBoxMoveHeight_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="SettingBoxPrintSpeed" HorizontalAlignment="Left" Height="25" Margin="165,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" TextChanged="SettingBoxPrintSpeed_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="SettingBoxMoveSpeed" HorizontalAlignment="Left" Height="25" Margin="165,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" TextChanged="SettingBoxMoveSpeed_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
+        <Label Content="Print Surface Size (X)" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Height="25" Width="150" Padding="0"/>
+        <Label Content="Print Surface Size (Y)" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Height="25" Width="150" Padding="0"/>
+        <Label Content="Offset" HorizontalAlignment="Left" Margin="277,71,0,0" VerticalAlignment="Top" Height="25" Width="50" Padding="0"/>
+        <Label Content="Offset" HorizontalAlignment="Left" Margin="277,101,0,0" VerticalAlignment="Top" Height="25" Width="50" Padding="0"/>
+        <Label Content="Print Height (Z)" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top" Height="25" Width="150" Padding="0"/>
+        <Label Content="Move Height (Z)" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Height="25" Width="150" Padding="0"/>
+        <Label Content="Print Speed (mm/s)" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" Height="25" Width="150" Padding="0"/>
+        <Label Content="Move Speed (mm/s)" HorizontalAlignment="Left" Margin="10,221,0,0" VerticalAlignment="Top" Height="25" Width="150" Padding="0"/>
+        <Label Content="Printer settings" HorizontalAlignment="Center" Height="45" Margin="0,10,0,0" VerticalAlignment="Top" Width="175" FontSize="24"/>
+        <Label Content="All sizes in mm" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
