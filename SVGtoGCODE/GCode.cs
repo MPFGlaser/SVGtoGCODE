@@ -21,7 +21,7 @@ namespace SVGtoGCODE
             GCodeCommands.Add("G1" + " X" + x.ToString() + " Y" + y.ToString() + " Z" + z.ToString());
         }
 
-        private void AddCommand(int x, int y, int z, int f)
+        public void AddCommand(int x, int y, int z, int f)
         {
             GCodeCommands.Add("G1" + " X" + x.ToString() + " Y" + y.ToString() + " Z" + z.ToString() + " F" + f.ToString());
         }
