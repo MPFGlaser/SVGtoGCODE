@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SVGtoGCODE.Models;
 
 namespace SVGtoGCODE
 {
@@ -21,15 +23,31 @@ namespace SVGtoGCODE
             GCodeCommands.Add("G1" + " X" + x.ToString() + " Y" + y.ToString() + " Z" + z.ToString());
         }
 
-        public void AddCommand(int x, int y, int z, int f)
+        public void AddCommand(int x, int y, int z, MovementModes movementMode)
         {
-            GCodeCommands.Add("G1" + " X" + x.ToString() + " Y" + y.ToString() + " Z" + z.ToString() + " F" + f.ToString());
+            switch (movementMode)
+            {
+                case MovementModes.Print:
+                    GCodeCommands.Add("G1" + " X" + x.ToString() + " Y" + y.ToString() + " Z" + z.ToString() + " F" + Properties.Settings.Default.PrintSpeed);
+                    break;
+                case MovementModes.Move:
+                    GCodeCommands.Add("G1" + " X" + x.ToString() + " Y" + y.ToString() + " Z" + z.ToString() + " F" + Properties.Settings.Default.MoveSpeed);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void SaveGCode()
         {
             // Should write list of commands to txt file.
             // https://stackoverflow.com/questions/15300572/saving-lists-to-txt-file
+            TextWriter writer = new StreamWriter("D:\\GCode\\save1.GCODE");
+
+            foreach (String s in GCodeCommands)
+                writer.WriteLine(s);
+
+            writer.Close();
         }
     }
 }
