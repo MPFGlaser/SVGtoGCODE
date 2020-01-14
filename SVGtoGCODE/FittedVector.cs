@@ -56,7 +56,8 @@ namespace SVGtoGCODE
             XmlNodeList elemList = vector.GetElementsByTagName("line");
             for (int i = 0; i < elemList.Count; i++)
             {
-                int x1 = int.Parse(elemList[i].Attributes["x1"].Value);
+                double x1ToParse = double.Parse(elemList[i].Attributes["x1"].Value);
+                int x1 = (int)Math.Round(x1ToParse, MidpointRounding.AwayFromZero);
                 if (!IsNegative(x1))
                 {
                     if (x1 > originalWidth)
@@ -74,7 +75,8 @@ namespace SVGtoGCODE
                     x1 = 0 + Properties.Settings.Default.OffsetX;
                 }
 
-                int y1 = int.Parse(elemList[i].Attributes["y1"].Value);
+                double y1ToParse = double.Parse(elemList[i].Attributes["y1"].Value);
+                int y1 = (int)Math.Round(y1ToParse, MidpointRounding.AwayFromZero);
                 if (!IsNegative(y1))
                 {
                     if (y1 > originalHeight)
@@ -102,7 +104,8 @@ namespace SVGtoGCODE
                 SendToGCode(x1, y1, Properties.Settings.Default.MoveHeight, MovementModes.Print);
                 SendToGCode(x1, y1, Properties.Settings.Default.PrintHeight, MovementModes.Print);
 
-                int x2 = int.Parse(elemList[i].Attributes["x2"].Value);
+                double x2ToParse = double.Parse(elemList[i].Attributes["x2"].Value);
+                int x2 = (int)Math.Round(x2ToParse, MidpointRounding.AwayFromZero);
                 if (!IsNegative(x2))
                 {
                     if (x2 > originalWidth)
@@ -120,7 +123,8 @@ namespace SVGtoGCODE
                     x2 = 0 + Properties.Settings.Default.OffsetX;
                 }
 
-                int y2 = int.Parse(elemList[i].Attributes["y2"].Value);
+                double y2ToParse = double.Parse(elemList[i].Attributes["y2"].Value);
+                int y2 = (int)Math.Round(y2ToParse, MidpointRounding.AwayFromZero);
                 if (!IsNegative(y2))
                 {
                     if (y2 > originalHeight)
