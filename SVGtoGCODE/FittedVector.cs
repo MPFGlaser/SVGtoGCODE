@@ -61,17 +61,17 @@ namespace SVGtoGCODE
                 {
                     if (x1 > originalWidth)
                     {
-                        x1 = (int)(originalWidth * scalingMultiplier);
+                        x1 = (int)(originalWidth * scalingMultiplier) + Properties.Settings.Default.OffsetX;
 
                     }
                     else
                     {
-                        x1 = (int)(x1 * scalingMultiplier);
+                        x1 = (int)(x1 * scalingMultiplier) + Properties.Settings.Default.OffsetX;
                     }
                 }
                 else
                 {
-                    x1 = 0;
+                    x1 = 0 + Properties.Settings.Default.OffsetX;
                 }
 
                 int y1 = int.Parse(elemList[i].Attributes["y1"].Value);
@@ -79,28 +79,27 @@ namespace SVGtoGCODE
                 {
                     if (y1 > originalHeight)
                     {
-                        y1 = (int)(originalHeight * scalingMultiplier);
+                        y1 = (int)(originalHeight * scalingMultiplier) + Properties.Settings.Default.OffsetY;
 
                     }
                     else
                     {
-                        y1 = (int)(y1 * scalingMultiplier);
+                        y1 = (int)(y1 * scalingMultiplier) + Properties.Settings.Default.OffsetY;
                     }
                 }
                 else
                 {
-                    y1 = 0;
+                    y1 = 0 + Properties.Settings.Default.OffsetY;
                 }
 
-                // debug only
-                //cords.Add("X" + x1.ToString() + " Y" + y1.ToString());
-
                 // Moves the print head to the right X/Y position while maintaining height and speed on the first run to prevent unwanted marks.
-                if(i == 0)
+                if (i == 0)
                 {
                     SendToGCode(x1, y1, Properties.Settings.Default.MoveHeight, MovementModes.Move);
                 }
 
+                // Moves printhead to start of line, then lowers to draw.
+                SendToGCode(x1, y1, Properties.Settings.Default.MoveHeight, MovementModes.Print);
                 SendToGCode(x1, y1, Properties.Settings.Default.PrintHeight, MovementModes.Print);
 
                 int x2 = int.Parse(elemList[i].Attributes["x2"].Value);
@@ -108,17 +107,17 @@ namespace SVGtoGCODE
                 {
                     if (x2 > originalWidth)
                     {
-                        x2 = (int)(originalWidth * scalingMultiplier);
+                        x2 = (int)(originalWidth * scalingMultiplier) + Properties.Settings.Default.OffsetX;
 
                     }
                     else
                     {
-                        x2 = (int)(x2 * scalingMultiplier);
+                        x2 = (int)(x2 * scalingMultiplier) + Properties.Settings.Default.OffsetX;
                     }
                 }
                 else
                 {
-                    x2 = 0;
+                    x2 = 0 + Properties.Settings.Default.OffsetX;
                 }
 
                 int y2 = int.Parse(elemList[i].Attributes["y2"].Value);
@@ -126,31 +125,30 @@ namespace SVGtoGCODE
                 {
                     if (y2 > originalHeight)
                     {
-                        y2 = (int)(originalHeight * scalingMultiplier);
+                        y2 = (int)(originalHeight * scalingMultiplier) + Properties.Settings.Default.OffsetY;
 
                     }
                     else
                     {
-                        y2 = (int)(y2 * scalingMultiplier);
+                        y2 = (int)(y2 * scalingMultiplier) + Properties.Settings.Default.OffsetY;
                     }
                 }
                 else
                 {
-                    y2 = 0;
+                    y2 = 0 + Properties.Settings.Default.OffsetY;
                 }
 
-                // debug only
-                //cords.Add("\nX" + x2.ToString() + " Y" + y2.ToString());
-
+                // Moves to second point of line, then lifts up printhead.
                 SendToGCode(x2, y2, Properties.Settings.Default.PrintHeight, MovementModes.Print);
+                SendToGCode(x2, y2, Properties.Settings.Default.MoveHeight, MovementModes.Print);
+
 
                 // Lifts the printhead straight up after completing the last command to prevent unwanted marks when returning to home position.
-                if (i == elemList.Count)
+                if (i == elemList.Count - 1)
                 {
                     SendToGCode(x2, y2, Properties.Settings.Default.MoveHeight, MovementModes.Move);
+                    gcode.SaveGCode();
                 }
-
-
             }
         }
 
