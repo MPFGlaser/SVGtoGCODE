@@ -20,19 +20,19 @@ namespace SVGtoGCODE
         // Holds the information about the defined workspace, such as the height and width dimensions.
         public Workspace()
         {
-
+            UpdateParameters();
         }
 
-        public Workspace(int sizeX, int sizeY, int offsetX, int offsetY, int printHeight, int moveHeight, int printSpeed, int moveSpeed)
+        public void UpdateParameters()
         {
-            _sizeX = sizeX;
-            _sizeY = sizeY;
-            _offsetX = offsetX;
-            _offsetY = offsetY;
-            _printHeight = printHeight;
-            _moveHeight = moveHeight;
-            _printSpeed = printSpeed;
-            _moveSpeed = moveSpeed;
+            _sizeX = Properties.Settings.Default.SizeX;
+            _sizeY = Properties.Settings.Default.SizeY;
+            _offsetX = Properties.Settings.Default.OffsetX;
+            _offsetY = Properties.Settings.Default.OffsetY;
+            _printHeight = Properties.Settings.Default.PrintHeight;
+            _moveHeight = Properties.Settings.Default.MoveHeight;
+            _printSpeed = Properties.Settings.Default.PrintSpeed;
+            _moveSpeed = Properties.Settings.Default.MoveSpeed;
         }
     }
 }
