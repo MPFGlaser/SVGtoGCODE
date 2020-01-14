@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="FittedVector.cs" />
     <Compile Include="GCode.cs" />
+    <Compile Include="Models\MovementModes.cs" />
     <Compile Include="Vector.cs" />
     <Compile Include="Workspace.cs" />
     <Page Include="ConversionSettings.xaml">
