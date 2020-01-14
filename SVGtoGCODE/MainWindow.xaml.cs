@@ -2,6 +2,7 @@
 using System.IO;
 using Microsoft.Win32;
 using System.Windows;
+using SVGtoGCODE.Models;
 
 namespace SVGtoGCODE
 {
