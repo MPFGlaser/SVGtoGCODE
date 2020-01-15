@@ -55,7 +55,7 @@
     <ApplicationIcon>IcoonMax241219_transparent.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>176FD5B81B02FFA67E06902AE878F1C8A951658F</ManifestCertificateThumbprint>
