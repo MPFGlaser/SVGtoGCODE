@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Microsoft.Win32;
 using SVGtoGCODE.Models;
 
@@ -83,6 +84,7 @@ namespace SVGtoGCODE
                 catch (Exception ex)
                 {
                     //MainWindow.SetStatusText("ERROR", $"Error: Could not read file from disk. Info: {ex.Message}");
+                    MessageBox.Show("Errror: Could not save file to disk. Info");
                 }
             }
             else
