@@ -40,8 +40,10 @@ namespace SVGtoGCODE
             XmlNodeList elemList = vector.GetElementsByTagName("svg");
             for (int i = 0; i < elemList.Count; i++)
             {
-                originalHeight = int.Parse(elemList[i].Attributes["height"].Value);
-                originalWidth = int.Parse(elemList[i].Attributes["width"].Value);
+                double heightToParse = double.Parse(elemList[i].Attributes["height"].Value);
+                originalHeight = (int)Math.Round(heightToParse, MidpointRounding.AwayFromZero);
+                double widthToParse = double.Parse(elemList[i].Attributes["width"].Value);
+                originalWidth = (int)Math.Round(widthToParse, MidpointRounding.AwayFromZero);
             }
 
             // Calculates scaling multiplier
