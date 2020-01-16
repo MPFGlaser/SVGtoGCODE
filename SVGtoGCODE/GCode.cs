@@ -42,23 +42,6 @@ namespace SVGtoGCODE
 
         public void SaveGCode()
         {
-            // Should write list of commands to txt file.
-            // https://stackoverflow.com/questions/15300572/saving-lists-to-txt-file
-            //TextWriter writer = new StreamWriter("D:\\GCode\\save1.GCODE");
-
-            //foreach (String s in GCodeCommands)
-            //    writer.WriteLine(s);
-
-            //writer.Close();
-
-
-
-
-
-
-
-            Stream checkStream;
-
             // Opens file selection dialog with the user's documents folder as default. File input is restricted to .svg files.
             SaveFileDialog saveFileDialog = new SaveFileDialog()
             {
