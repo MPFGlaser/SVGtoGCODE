@@ -8,14 +8,11 @@ using System.Xml;
 
 namespace SVGtoGCODE
 {
-    // Class for working with imported vector files
+    /// <summary>
+    /// Takes imported Vector files and allows conversion to happen.
+    /// </summary>
     public class Vector
     {
-        /* TO DO
-           - Check aspect ratio/rotation on import, pad if necessary.
-           - Extract & convert vector shapes to GCode
-        */
-
         // Variables for internal storage of data within class
         private string filePath;
         private string fileName;
@@ -26,7 +23,10 @@ namespace SVGtoGCODE
         // Constructor
         public Vector() { }
 
-        // Constructor. Passes the right parameters to class on image selection/instance creation
+        /// <summary>
+        /// Takes path of .SVG file upon instance creation. Copies file to temporary directory and saves path.
+        /// </summary>
+        /// <param name="path"></param>
         public Vector(string path)
         {
             filePath = path;
@@ -41,20 +41,28 @@ namespace SVGtoGCODE
             }
         }
 
-        // Gets the name of selected file. Handy for displaying it to the user.
+        /// <summary>
+        /// Gets the name of selected file. Handy for displaying it to the user.
+        /// </summary>
+        /// <returns></returns>
         public string SelectedFileName()
         {
             fileName = System.IO.Path.GetFileName(filePath);
             return fileName;
         }
 
-        // Returns the generated preview of the selected vector file.
+        /// <summary>
+        /// Returns the generated preview of the selected vector file.
+        /// </summary>
+        /// <returns></returns>
         public BitmapImage SendPreview()
         {
             return preview;
         }
 
-        // Converts the SVG into GCode
+        /// <summary>
+        /// Converts the SVG into GCode
+        /// </summary>
         public void Convert()
         {
             XmlDocument vector = new XmlDocument();
@@ -62,15 +70,13 @@ namespace SVGtoGCODE
             FittedVector vectorFitted = new FittedVector(vector);
         }
 
-        // Creates .PNG preview based on the selected vector file. Renders the vector shapes, then draws them in the bitmap image.
+        /// <summary>
+        /// Creates .PNG preview based on the selected vector file. Renders the vector shapes, then draws them in the bitmap image.
+        /// </summary>
         private void CreatePreview()
         {
             var svg = SvgDocument.Open(tempSVG);
             svg.ShapeRendering = SvgShapeRendering.Auto;
-
-            // try using this to fix stuff :)
-            //svg.Transforms.Add(new Svg.Transforms.SvgRotate(90.0f));
-
             Bitmap previewImage = svg.Draw();
             MemoryStream ms = new MemoryStream();
             ((System.Drawing.Bitmap)previewImage).Save(ms, System.Drawing.Imaging.ImageFormat.Png);
@@ -81,7 +87,9 @@ namespace SVGtoGCODE
             preview.EndInit();
         }
 
-        // Copies the selected vector file to temp directory to prevent possible damage to the original file during transformation.
+        /// <summary>
+        /// Copies the selected vector file to temp directory to prevent possible damage to the original file during transformation.
+        /// </summary>
         private void CopySVGToTempDir()
         {
             tempSVG = System.IO.Path.GetTempFileName();

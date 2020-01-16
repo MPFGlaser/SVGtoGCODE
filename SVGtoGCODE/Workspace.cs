@@ -8,6 +8,7 @@ namespace SVGtoGCODE
 {
     public class Workspace
     {
+        // Stores all variables for internal use.
         private int _sizeX;
         private int _sizeY;
         private int _offsetX;
@@ -17,13 +18,17 @@ namespace SVGtoGCODE
         private int _printSpeed;
         private int _moveSpeed;
 
-        // Holds the information about the defined workspace, such as the height and width dimensions.
+        /// <summary>
+        ///  Creates workspace based on parameters given in Settings.
+        /// </summary>
         public Workspace()
         {
             UpdateParameters();
         }
 
-        // Updates the parameters/values based on the user-specified settings from the Conversion Settings dialog.
+        /// <summary>
+        /// Updates internal parameters to the values defined in the settings box.
+        /// </summary>
         public void UpdateParameters()
         {
             _sizeX = Properties.Settings.Default.SizeX;
@@ -37,14 +42,14 @@ namespace SVGtoGCODE
         }
 
 
-        // Functions to return parameters of workspace when requested.
-        public int sizeX() { return _sizeX; }
-        public int sizeY() { return _sizeY; }
-        public int offsetX() { return _offsetX; }
-        public int offsetY() { return _offsetY; }
-        public int printHeight() { return _printHeight; }
-        public int moveHeight() { return _moveHeight; }
-        public int printSpeed() { return _printSpeed; }
-        public int moveSpeed() { return _moveSpeed; }
+        // Properties to (publicly) access parameters of workspace when requested.
+        public int SizeX => _sizeX;
+        public int SizeY => _sizeY;
+        public int OffsetX => _offsetX;
+        public int OffsetY => _offsetY;
+        public int PrintHeight => _printHeight;
+        public int MoveHeight => _moveHeight;
+        public int printSpeed => _printSpeed;
+        public int MoveSpeed => _moveSpeed;
     }
 }

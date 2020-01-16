@@ -2,7 +2,6 @@
 using System.IO;
 using Microsoft.Win32;
 using System.Windows;
-using SVGtoGCODE.Models;
 
 namespace SVGtoGCODE
 {
@@ -21,6 +20,9 @@ namespace SVGtoGCODE
             SelectSVG();
         }
 
+        /// <summary>
+        /// Opens file selection dialog to allow the user to select an .SVG file.
+        /// </summary>
         private void SelectSVG()
         {
             Stream checkStream;
@@ -65,23 +67,38 @@ namespace SVGtoGCODE
             vector.Convert();
         }
 
-        // Handles the preview window. Gets the preview from the current vector object.
+        /// <summary>
+        /// Handles the preview window. Gets the preview from the current vector object.
+        /// </summary>
         private void UpdatePreview()
         {
             PreviewImage.Source = vector.SendPreview();
         }
 
-        // Handles all text to be shown to the user. Takes optional type argument as well as the message to display.
+        /// <summary>
+        /// Sets the status text to display to the user.
+        /// </summary>
+        /// <param name="message"></param>
         private void SetStatusText(string message)
         {
             TextBlockStatus.Text = message;
         }
 
+        /// <summary>
+        /// Sets the status text to display to the user. Use type parameter to define a prefix.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="message"></param>
         private void SetStatusText(string type, string message)
         {
             TextBlockStatus.Text = type + "!\n" + message;
         }
 
+        /// <summary>
+        /// Opens print settings dialog when activated by button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenSettings(object sender, RoutedEventArgs e)
         {
             ConversionSettings settings = new ConversionSettings();

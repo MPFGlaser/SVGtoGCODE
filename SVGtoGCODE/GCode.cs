@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 using SVGtoGCODE.Models;
@@ -13,18 +10,33 @@ namespace SVGtoGCODE
     public class GCode
     {
         List<string> GCodeCommands;
-        // Is able to convert instance of FittedVector into GCode that complies with the restrictions given in instance of Workspace.
-        // Should be able to generate, save, and export GCode.
+
+        /// <summary>
+        /// Takes FittedVector and converts given coordinates to GCode.
+        /// </summary>
         public GCode()
         {
             GCodeCommands = new List<string>();
         }
 
+        /// <summary>
+        /// Adds a GCode command to the list using the given X, Y, and Z coordinates.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
         public void AddCommand(int x, int y, int z)
         {
             GCodeCommands.Add("G1" + " X" + x.ToString() + " Y" + y.ToString() + " Z" + z.ToString());
         }
 
+        /// <summary>
+        /// Adds a GCode command to the list using the given X, Y, and Z coordinates, as well as a speed based on the movement mode.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="movementMode"></param>
         public void AddCommand(int x, int y, int z, MovementModes movementMode)
         {
             switch (movementMode)
@@ -40,6 +52,9 @@ namespace SVGtoGCODE
             }
         }
 
+        /// <summary>
+        /// Saves list of GCode to file. Location of file is determined by user using SaveFileDialog.
+        /// </summary>
         public void SaveGCode()
         {
             // Opens file selection dialog with the user's documents folder as default. File input is restricted to .svg files.

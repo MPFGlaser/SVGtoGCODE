@@ -1,16 +1,13 @@
 ﻿using SVGtoGCODE.Models;
-using Svg;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 
 namespace SVGtoGCODE
 {
-    // inherit from vector
+    /// <summary>
+    /// Takes .SVG from Vector instance and applies transformations to ensure it fits within given parameters in ConversionSettings.
+    /// </summary>
     public class FittedVector : Vector
     {
         private int originalHeight;
@@ -20,22 +17,27 @@ namespace SVGtoGCODE
         private double scalingMultiplier;
         GCode gcode;
 
-        // Should hold the info for the instance of Vector which has been fitted in a specific printing/work space
+        /// <summary>
+        /// Constructor for FittedVector. Takes vector from Vector class.
+        /// </summary>
+        /// <param name="vector"></param>
+        // Imports max dimensions from workspace instance, then fetches size of document and makes adjustments accordingly.
         public FittedVector(XmlDocument vector)
         {
             gcode = new GCode();
             Workspace workspace = new Workspace();
-            fittedHeight = workspace.sizeY();
-            fittedWidth = workspace.sizeX();
+            fittedHeight = workspace.SizeY;
+            fittedWidth = workspace.SizeX;
             GetDocumentSize(vector);
             KeepCoordsWithinBounds(vector);
         }
 
+        /// <summary>
+        /// Fetches document size from vector. Then calculates scalingMultiplier.
+        /// </summary>
+        /// <param name="vector"></param>
         private void GetDocumentSize(XmlDocument vector)
         {
-            // This works!
-            // https://stackoverflow.com/questions/933687/read-xml-attribute-using-xmldocument
-
             // Reads <svg> tag from xml file, then saves the height and width attributes.
             XmlNodeList elemList = vector.GetElementsByTagName("svg");
             for (int i = 0; i < elemList.Count; i++)
@@ -49,15 +51,19 @@ namespace SVGtoGCODE
             // Calculates scaling multiplier
             scalingMultiplier = (double)fittedHeight / (double)originalHeight;
             scalingMultiplier = Math.Floor(scalingMultiplier * 100d) / 100d;
-
         }
 
+        /// <summary>
+        /// Takes all lines from vector, then applies maths to make sure they fit within the given boundaries.
+        /// </summary>
+        /// <param name="vector"></param>
         private void KeepCoordsWithinBounds(XmlDocument vector)
         {
-            //List<string> cords = new List<string>();
+            // Makes a list of all <line> elements in vector, then applies scaling maths.
             XmlNodeList elemList = vector.GetElementsByTagName("line");
             for (int i = 0; i < elemList.Count; i++)
             {
+                // Maths part for coordinate x1
                 double x1ToParse = double.Parse(elemList[i].Attributes["x1"].Value);
                 int x1 = (int)Math.Round(x1ToParse, MidpointRounding.AwayFromZero);
                 if (!IsNegative(x1))
@@ -77,6 +83,7 @@ namespace SVGtoGCODE
                     x1 = 0 + Properties.Settings.Default.OffsetX;
                 }
 
+                // Maths part for coordinate y1
                 double y1ToParse = double.Parse(elemList[i].Attributes["y1"].Value);
                 int y1 = (int)Math.Round(y1ToParse, MidpointRounding.AwayFromZero);
                 if (!IsNegative(y1))
@@ -106,6 +113,7 @@ namespace SVGtoGCODE
                 SendToGCode(x1, y1, Properties.Settings.Default.MoveHeight, MovementModes.Print);
                 SendToGCode(x1, y1, Properties.Settings.Default.PrintHeight, MovementModes.Print);
 
+                // Maths part for coordinate x2
                 double x2ToParse = double.Parse(elemList[i].Attributes["x2"].Value);
                 int x2 = (int)Math.Round(x2ToParse, MidpointRounding.AwayFromZero);
                 if (!IsNegative(x2))
@@ -125,6 +133,7 @@ namespace SVGtoGCODE
                     x2 = 0 + Properties.Settings.Default.OffsetX;
                 }
 
+                // Maths part for coordinate y2
                 double y2ToParse = double.Parse(elemList[i].Attributes["y2"].Value);
                 int y2 = (int)Math.Round(y2ToParse, MidpointRounding.AwayFromZero);
                 if (!IsNegative(y2))
@@ -158,11 +167,24 @@ namespace SVGtoGCODE
             }
         }
 
+        /// <summary>
+        /// Sends specified coordinates to GCode instance.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
         private void SendToGCode(int x, int y, int z)
         {
             gcode.AddCommand(x, y, z);
         }
 
+        /// <summary>
+        /// Sends specified coordinates and movement mode to GCode instance.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="movementMode"></param>
         private void SendToGCode(int x, int y, int z, MovementModes movementMode)
         {
             switch (movementMode)
@@ -176,8 +198,11 @@ namespace SVGtoGCODE
             }
         }
 
-
-        // Checks if given coordinate is negative (<0)
+        /// <summary>
+        /// Checks if given number is negative, then returns bool.
+        /// </summary>
+        /// <param name="coordinate"></param>
+        /// <returns></returns>
         private bool IsNegative(int coordinate)
         {
             if (coordinate < 0)
