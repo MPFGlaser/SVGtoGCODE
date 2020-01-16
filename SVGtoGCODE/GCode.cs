@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using Microsoft.Win32;
 using SVGtoGCODE.Models;
 
 namespace SVGtoGCODE
@@ -40,14 +42,39 @@ namespace SVGtoGCODE
 
         public void SaveGCode()
         {
-            // Should write list of commands to txt file.
-            // https://stackoverflow.com/questions/15300572/saving-lists-to-txt-file
-            TextWriter writer = new StreamWriter("D:\\GCode\\save1.GCODE");
+            // Opens file selection dialog with the user's documents folder as default. File input is restricted to .svg files.
+            SaveFileDialog saveFileDialog = new SaveFileDialog()
+            {
+                FileName = "result.GCODE",
+                Filter = "GCODE (*.GCODE)|*.GCODE",
+                Title = "Save GCode",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
 
-            foreach (String s in GCodeCommands)
-                writer.WriteLine(s);
+            // Tries to read file (if selected) and passes it to the vector object. 
+            //Then makes sure the user knows what file is selected by showing the file name and a preview.
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    TextWriter writer = new StreamWriter(saveFileDialog.FileName);
 
-            writer.Close();
+                    foreach (String s in GCodeCommands)
+                        writer.WriteLine(s);
+
+                    writer.Close();
+                }
+                catch (Exception ex)
+                {
+                    //MainWindow.SetStatusText("ERROR", $"Error: Could not read file from disk. Info: {ex.Message}");
+                    MessageBox.Show("Errror: Could not save file to disk. Info");
+                }
+            }
+            else
+            {
+                //Mainwindow.SetStatusText("ERROR", "Unknown error occurred. Please try again later.");
+            }
+
         }
     }
 }
