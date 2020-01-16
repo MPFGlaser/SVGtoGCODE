@@ -18,7 +18,6 @@ namespace SVGtoGCODE
         private string fileName;
         private string tempSVG;
         private BitmapImage preview;
-        private List<string> coordinates = new List<string>();
 
         // Constructor
         public Vector() { }
